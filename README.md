@@ -4,7 +4,7 @@
 
 ### Description
 
-A $4 \mul 4$ grid contains random multiples of 2. Two number of equal value can be joined together to create one new value. Use the arrow keys to move the numbers up, down, right or left, to join numbers all the way up to 2048.
+A $`4 \mul 4`$ grid contains random multiples of 2. Two number of equal value can be joined together to create one new value. Use the arrow keys to move the numbers up, down, right or left, to join numbers all the way up to 2048.
 
 ## Code
 
