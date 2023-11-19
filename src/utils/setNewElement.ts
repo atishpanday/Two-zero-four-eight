@@ -1,4 +1,6 @@
-export const setNewElement = (newRows) => {
+import { chooseNewNumber } from './chooseNewNumber.ts'
+
+export const setNewElement = (newRows: number[][]): number[][] => {
 
     let zerosIndex: number[] = [];
 
@@ -15,7 +17,7 @@ export const setNewElement = (newRows) => {
     const updatedRows = newRows.map((row, i) => {
         const newRow = row.slice();
         if (i === Math.floor(r_index / 4)) {
-            newRow[r_index % 4] = 2;
+            newRow[r_index % 4] = chooseNewNumber();
         }
         return newRow;
     });

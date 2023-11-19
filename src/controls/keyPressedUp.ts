@@ -2,7 +2,7 @@ import { isArrayEqual } from "../utils/isArrayEqual.ts";
 import { setNewElement } from "../utils/setNewElement.ts";
 import { shiftElements } from "../utils/shiftElements.ts";
 
-export const keyPressedUp = (rows, setRows) => {
+export const keyPressedUp = (rows: number[][], setRows: React.Dispatch<React.SetStateAction<number[][]>>): void => {
 
     let row1 = [0, 0, 0, 0];
     let row2 = [0, 0, 0, 0];

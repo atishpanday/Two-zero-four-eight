@@ -1,57 +1,65 @@
 import { Box, Grid } from "@mui/material";
 import Tile from "./Tile.tsx";
-import React, { useState } from "react";
+import React from "react";
 import { keyPressedUp } from "../controls/keyPressedUp.ts";
 import { keyPressedDown } from "../controls/keyPressedDown.ts";
 import { keyPressedLeft } from "../controls/keyPressedLeft.ts";
 import { keyPressedRight } from "../controls/keyPressedRight.ts";
-import { getDistinctRandomNumbers } from "../utils/getDistinctRandomNumbers.ts";
+import { colors } from "../resources/colors.ts";
+import { hasZero } from "../utils/hasZero.ts";
+import { hasAdjacentEqual } from "../utils/hasAdjacentEqual.ts";
+import { has2048 } from "../utils/has2048.ts";
 
-type transformType = 'translateX(2px)' | 'translateX(-2px)' | 'translateY(2px)' | 'translateY(-2px)' | 'none';
+type TileBoxPropType = {
+    rows: number[][],
+    setRows: React.Dispatch<React.SetStateAction<number[][]>>,
+    setGameOver: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+    setWin: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+}
 
-const TileBox = () => {
-    
-    const initRows: (number[])[] = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+const TileBox = ({ rows, setRows, setGameOver, setWin }: TileBoxPropType) => {
 
-    const [init1, init2] = getDistinctRandomNumbers(0, 15);
-
-    initRows[Math.floor(init1 / 4)][init1 % 4] = 2;
-    initRows[Math.floor(init2 / 4)][init2 % 4] = 2;
-
-    const [rows, setRows] = useState<(number[])[]>(initRows);
-
-    const [transform, setTransform] = useState<transformType>('none');
-
-    const handleKeyPress = (event) => {
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 
         switch(event.key) {
             case 'ArrowUp':
-                setTransform('translateY(-2px)');
                 keyPressedUp(rows, setRows);
                 break;
             case 'ArrowDown':
-                setTransform('translateY(2px)');
                 keyPressedDown(rows, setRows);
                 break;
             case 'ArrowLeft':
-                setTransform('translateX(-2px)');
                 keyPressedLeft(rows, setRows);
                 break;
             case 'ArrowRight':
-                setTransform('translateX(2px)');
                 keyPressedRight(rows, setRows);
                 break;
         }
 
+        if(has2048(rows)) {
+            setWin(true);
+        }
+
+        if(!hasZero(rows) && !hasAdjacentEqual(rows)) {
+            setGameOver(true);
+        }
     }
 
     return (
-        <Box bgcolor={"#bbada0"} p={2} width={430} borderRadius={1} onKeyDown={handleKeyPress} tabIndex={0}>
+        <Box 
+        bgcolor={colors.GRID_COL} 
+        p={2} 
+        width={430} 
+        borderRadius={1} 
+        onKeyDown={handleKeyPress} 
+        tabIndex={0}
+        style={{ outline: 'none' }}
+        >
             <Grid container spacing={2}>
                 {rows.map((row) => (
                     <Grid item container spacing={2}>
                         {row.map((val) => (
-                            <Tile value={val} transform={transform} />
+                            <Tile value={val} />
                         ))}
                     </Grid>
                 ))}
