@@ -1,5 +1,6 @@
-import { setNewElement } from "./setNewElement.ts";
-import { shiftElements } from "./shiftElements.ts";
+import { isArrayEqual } from "../utils/isArrayEqual.ts";
+import { setNewElement } from "../utils/setNewElement.ts";
+import { shiftElements } from "../utils/shiftElements.ts";
 
 export const keyPressedLeft = (rows, setRows) => {
 
@@ -20,8 +21,10 @@ export const keyPressedLeft = (rows, setRows) => {
         return temp_col;
     })
 
-    const updatedRows = setNewElement(newRows);
+    if(!isArrayEqual(rows, newRows)) {
+        const updatedRows = setNewElement(newRows);
+        setRows(prev => updatedRows);
+    }
 
-    setRows(prev => updatedRows);
 
 }

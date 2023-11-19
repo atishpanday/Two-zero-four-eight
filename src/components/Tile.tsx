@@ -2,7 +2,8 @@ import { Grid, Paper, Typography } from '@mui/material';
 import React from 'react';
 
 type TileProps = {
-    value: number
+    value: number,
+    transform: string,
 }
 
 const setBgColor = (value) => {
@@ -28,13 +29,13 @@ const setBgColor = (value) => {
             case 512:
                 return '#edc950';
             case 1024:
-                return '';
+                return '#edc950';
             case 2048:
-                return '';
+                return '#edc950';
         }
 }
 
-const Tile = ({ value } : TileProps) => {
+const Tile = ({ value, transform } : TileProps) => {
 
     const squareStyle: React.CSSProperties = {
         height: 100,
@@ -42,8 +43,10 @@ const Tile = ({ value } : TileProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: 'none',
+        boxShadow: value > 512 ? value === 1024 ? '0 0 10px 5px rgba(243, 215, 116)' : '0 0 20px 10px rgba(243, 215, 116)' : 'none',
         backgroundColor: setBgColor(value),
+        transition: value > 0 ? 'transform 0.3s ease-in' : 'none',
+        transform: transform,
     };
 
     return (

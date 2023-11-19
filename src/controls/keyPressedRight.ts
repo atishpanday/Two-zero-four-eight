@@ -1,5 +1,6 @@
-import { setNewElement } from "./setNewElement.ts";
-import { shiftElements } from "./shiftElements.ts";
+import { isArrayEqual } from "../utils/isArrayEqual.ts";
+import { setNewElement } from "../utils/setNewElement.ts";
+import { shiftElements } from "../utils/shiftElements.ts";
 
 export const keyPressedRight = (rows, setRows) => {
 
@@ -19,8 +20,10 @@ export const keyPressedRight = (rows, setRows) => {
         return temp_col.slice().reverse();
     });
 
-    const updatedRows = setNewElement(newRows);
+    if(!isArrayEqual(rows, newRows)) {
+        const updatedRows = setNewElement(newRows);
+        setRows(prev => updatedRows);
+    }
 
-    setRows(() => updatedRows);
 
 }
