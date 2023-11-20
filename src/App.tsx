@@ -2,18 +2,11 @@ import { Alert, Box, Snackbar } from "@mui/material";
 import TileBox from "./components/TileBox.tsx";
 import HeadBoard from "./components/HeadBoard.tsx";
 import React, { useState } from "react";
-import { getDistinctRandomNumbers } from "./utils/getDistinctRandomNumbers.ts";
+import { startNewGame } from "./controls/startNewGame.ts";
 
 function App() {
 
-  const initRows: (number[])[] = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-
-  const [init1, init2] = getDistinctRandomNumbers(0, 15);
-
-  initRows[Math.floor(init1 / 4)][init1 % 4] = 2;
-  initRows[Math.floor(init2 / 4)][init2 % 4] = 2;
-
-  const [rows, setRows] = useState<number[][]>(initRows);
+  const [rows, setRows] = useState<number[][]>(startNewGame());
 
   const [gameOver, setGameOver] = useState<boolean | undefined>(false);
 
@@ -21,8 +14,8 @@ function App() {
 
   return (
     <Box display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'100vh'}>
-      <HeadBoard setRows={setRows} />
-      <TileBox rows={rows} setRows={setRows} setGameOver={setGameOver} setWin={setWin}/>
+      <HeadBoard win={win} gameOver={gameOver} setRows={setRows} />
+      <TileBox rows={rows} win={win} gameOver={gameOver} setRows={setRows} setGameOver={setGameOver} setWin={setWin}/>
       <Snackbar
         open={win}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}

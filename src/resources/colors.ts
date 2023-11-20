@@ -12,6 +12,7 @@ export const colors = {
     COLOR_128: '#edd073',
     COLOR_256: '#edcc62',
     COLOR_512: '#edc950',
+    SHDW_COL: 'rgba(243, 215, 116)',
     TXT_COL_LGT: '#f9f6f2',
     TXT_COL_DRK: '#776e65',
 }

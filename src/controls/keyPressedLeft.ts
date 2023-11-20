@@ -1,8 +1,8 @@
 import { isArrayEqual } from "../utils/isArrayEqual.ts";
-import { setNewElement } from "../utils/setNewElement.ts";
-import { shiftElements } from "../utils/shiftElements.ts";
+import { setNewElement } from "./setNewElement.ts";
+import { shiftElements } from "./shiftElements.ts";
 
-export const keyPressedLeft = (rows: number[][], setRows: React.Dispatch<React.SetStateAction<number[][]>>): void => {
+export const keyPressedLeft = (rows: number[][]): number[][] => {
 
     const newRows = rows.map((row, i) => {
 
@@ -23,8 +23,8 @@ export const keyPressedLeft = (rows: number[][], setRows: React.Dispatch<React.S
 
     if(!isArrayEqual(rows, newRows)) {
         const updatedRows = setNewElement(newRows);
-        setRows(prev => updatedRows);
+        return updatedRows;
     }
 
-
+    return rows;
 }

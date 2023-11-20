@@ -1,4 +1,4 @@
-import { chooseNewNumber } from './chooseNewNumber.ts'
+import { chooseNewNumber } from '../utils/chooseNewNumber.ts'
 
 export const setNewElement = (newRows: number[][]): number[][] => {
 

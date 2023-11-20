@@ -1,24 +1,15 @@
 import React from 'react';
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { colors } from '../resources/colors.ts';
-import { getDistinctRandomNumbers } from '../utils/getDistinctRandomNumbers.ts';
+import { startNewGame } from '../controls/startNewGame.ts';
 
 type HeadBoardPropType = {
+    win: boolean | undefined,
+    gameOver: boolean | undefined,
     setRows: React.Dispatch<React.SetStateAction<number[][]>>,
 }
 
-const HeadBoard = ({ setRows }: HeadBoardPropType) => {
-
-    const startNewGame = () => {
-        const initRows: (number[])[] = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-
-        const [init1, init2] = getDistinctRandomNumbers(0, 15);
-      
-        initRows[Math.floor(init1 / 4)][init1 % 4] = 2;
-        initRows[Math.floor(init2 / 4)][init2 % 4] = 2;
-
-        setRows(initRows);
-    }
+const HeadBoard = ({ win, gameOver, setRows }: HeadBoardPropType) => {
     
     return (
         <Box width={430} p={2}>
@@ -31,7 +22,8 @@ const HeadBoard = ({ setRows }: HeadBoardPropType) => {
                         <Button 
                             variant='contained' 
                             style={{ backgroundColor: colors.NEW_GAME_COL, color: colors.TXT_COL_LGT }} 
-                            onClick={() => startNewGame()}
+                            disabled={win || gameOver}
+                            onClick={() => setRows(startNewGame())}
                             >
                             New Game
                         </Button>
