@@ -1,6 +1,6 @@
 import { chooseNewNumber } from '../utils/chooseNewNumber.ts'
 
-export const setNewElement = (newRows: number[][]): number[][] => {
+export const setNewElement = (newRows: number[][]): [number, number[][]] => {
 
     let zerosIndex: number[] = [];
 
@@ -22,5 +22,5 @@ export const setNewElement = (newRows: number[][]): number[][] => {
         return newRow;
     });
 
-    return updatedRows;
+    return [r_index, updatedRows];
 }

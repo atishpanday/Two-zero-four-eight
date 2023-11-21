@@ -1,5 +1,3 @@
-import { isArrayEqual } from "../utils/isArrayEqual.ts";
-import { setNewElement } from "./setNewElement.ts";
 import { shiftElements } from "./shiftElements.ts";
 
 export const keyPressedUp = (rows: number[][]): number[][] => {
@@ -30,11 +28,6 @@ export const keyPressedUp = (rows: number[][]): number[][] => {
 
     const newRows = [row1, row2, row3, row4];
 
-    if(!isArrayEqual(rows, newRows)) {
-        const updatedRows = setNewElement(newRows);
-        return updatedRows;
-    }
-
-    return rows;
+    return newRows;
 
 }

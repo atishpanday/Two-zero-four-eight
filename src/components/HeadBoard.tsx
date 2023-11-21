@@ -15,7 +15,7 @@ const HeadBoard = ({ win, gameOver, setRows }: HeadBoardPropType) => {
         <Box width={430} p={2}>
             <Grid container>
                 <Grid item xs={6} md={6} lg={6}>
-                    <Typography fontSize={40} fontWeight={700} color={colors.COLOR_2048_LOGO}>2048</Typography>
+                    <Typography variant={'h3'} fontWeight={700} color={colors.COLOR_2048_LOGO}>2048</Typography>
                 </Grid>
                 <Grid item xs={6} md={6} lg={6} display={'flex'} justifyContent={'flex-end'} alignItems={'center'}>
                     <div>

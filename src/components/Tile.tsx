@@ -1,43 +1,29 @@
 import { Paper, Typography } from '@mui/material';
 import React from 'react';
 import { colors } from '../resources/colors.ts';
+import { animated, useSpring } from 'react-spring';
+import { transformTile } from '../utils/transformTile.ts';
+import { setBgColor } from '../utils/setBgColor.ts';
 
 type TileProps = {
     value: number,
+    dir: string,
+    row: number,
+    col: number,
+    rIndex: number,
 }
 
-const setBgColor = (value: number): string => {
-    switch (value) {
-        case 0:
-            return colors.COLOR_0;
-        case 2:
-            return colors.COLOR_2;
-        case 4:
-            return colors.COLOR_4;
-        case 8:
-            return colors.COLOR_8;
-        case 16:
-            return colors.COLOR_16;
-        case 32:
-            return colors.COLOR_32;
-        case 64:
-            return colors.COLOR_64;
-        case 128:
-            return colors.COLOR_128;
-        case 256:
-            return colors.COLOR_256;
-        case 512:
-            return colors.COLOR_512;
-        case 1024:
-            return colors.COLOR_512;
-        case 2048:
-            return colors.COLOR_512;
-        default:
-            return '';
-    }
-}
+const Tile = ({ value, dir, row, col, rIndex }: TileProps) => {
 
-const Tile = ({ value }: TileProps) => {
+    const newTile = row === Math.floor(rIndex / 4) && col === (rIndex % 4);
+
+    const animationStyle = useSpring({
+        to: async (next) => {
+            await next({ transform: newTile ? 'scale(1)' : 'translate(0, 0)' })
+        },
+        from: { transform: value > 0 ? transformTile(dir, row, col, rIndex, newTile) : 'translateX(0)' },
+        reset: true,
+    })
 
     const squareStyle: React.CSSProperties = {
         height: 100,
@@ -50,11 +36,17 @@ const Tile = ({ value }: TileProps) => {
     };
 
     return (
-        <Paper style={squareStyle}>
-            <Typography fontSize={40} color={value < 8 ? colors.TXT_COL_DRK : colors.TXT_COL_LGT} fontWeight={700}>
-                {value > 0 ? value : null}
-            </Typography>
-        </Paper>
+        <animated.div style={animationStyle}>
+            <Paper style={squareStyle}>
+                <Typography
+                    variant={value < 1024 ? 'h3' : 'h4'}
+                    color={value < 8 ? colors.TXT_COL_DRK : colors.TXT_COL_LGT}
+                    fontWeight={700}
+                >
+                    {value > 0 ? value : null}
+                </Typography>
+            </Paper>
+        </animated.div>
     )
 }
 
