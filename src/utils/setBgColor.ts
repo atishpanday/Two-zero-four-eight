@@ -3,7 +3,7 @@ import { colors } from "../resources/colors.ts";
 export const setBgColor = (value: number): string => {
     switch (value) {
         case 0:
-            return colors.COLOR_0;
+            return colors.TRANSPARENT;
         case 2:
             return colors.COLOR_2;
         case 4:

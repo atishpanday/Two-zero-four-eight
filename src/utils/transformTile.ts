@@ -5,13 +5,13 @@ export const transformTile = (dir: string, row: number, col: number, rIndex: num
     else {
         switch(dir) {
             case 'up':
-                return `translateY(${(3 - row) * 50}px)`;
+                return `translateY(${(3 - row) * 100}px)`;
             case 'down':
-                return `translateY(-${row * 50}px)`;
+                return `translateY(-${row * 100}px)`;
             case 'left':
-                return `translateX(${(3 - col) * 50}px)`;
+                return `translateX(${(3 - col) * 100}px)`;
             case 'right':
-                return `translateX(-${col * 50}px)`;
+                return `translateX(-${col * 100}px)`;
             default:
                 return 'translate(0)';
         }

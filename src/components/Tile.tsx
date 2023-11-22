@@ -1,9 +1,9 @@
-import { Paper, Typography } from '@mui/material';
 import React from 'react';
+import { Box, Paper, Typography } from '@mui/material';
 import { colors } from '../resources/colors.ts';
-import { animated, useSpring } from 'react-spring';
-import { transformTile } from '../utils/transformTile.ts';
 import { setBgColor } from '../utils/setBgColor.ts';
+import { transformTile } from '../utils/transformTile.ts';
+import { animated, useSpring } from 'react-spring';
 
 type TileProps = {
     value: number,
@@ -21,11 +21,16 @@ const Tile = ({ value, dir, row, col, rIndex }: TileProps) => {
         to: async (next) => {
             await next({ transform: newTile ? 'scale(1)' : 'translate(0, 0)' })
         },
-        from: { transform: value > 0 ? transformTile(dir, row, col, rIndex, newTile) : 'translateX(0)' },
+        from: { transform: (value > 0) ? transformTile(dir, row, col, rIndex, newTile) : 'translateX(0)' },
         reset: true,
     })
 
-    const squareStyle: React.CSSProperties = {
+    const gridCellStyle: React.CSSProperties = {
+        height: 100,
+        backgroundColor: colors.COLOR_0,
+    }
+
+    const tileStyle: React.CSSProperties = {
         height: 100,
         textAlign: 'center',
         display: 'flex',
@@ -36,17 +41,19 @@ const Tile = ({ value, dir, row, col, rIndex }: TileProps) => {
     };
 
     return (
-        <animated.div style={animationStyle}>
-            <Paper style={squareStyle}>
-                <Typography
-                    variant={value < 1024 ? 'h3' : 'h4'}
-                    color={value < 8 ? colors.TXT_COL_DRK : colors.TXT_COL_LGT}
-                    fontWeight={700}
-                >
-                    {value > 0 ? value : null}
-                </Typography>
-            </Paper>
-        </animated.div>
+        <Box style={gridCellStyle}>
+            <animated.div style={animationStyle}>
+                <Paper style={tileStyle}>
+                    <Typography
+                        variant={value < 1024 ? 'h3' : 'h4'}
+                        color={value < 8 ? colors.TXT_COL_DRK : colors.TXT_COL_LGT}
+                        fontWeight={700}
+                    >
+                        {value > 0 ? value : null}
+                    </Typography>
+                </Paper>
+            </animated.div>
+        </Box>
     )
 }
 

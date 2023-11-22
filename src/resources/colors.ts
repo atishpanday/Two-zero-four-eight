@@ -1,4 +1,5 @@
 export const colors = {
+    TRANSPARENT: 'transparent',
     NEW_GAME_COL: '#8f7a66',
     COLOR_2048_LOGO: '#776e65',
     GRID_COL: "#bbada0",

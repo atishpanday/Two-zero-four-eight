@@ -95,7 +95,7 @@ const TileBox = ({ rows, win, gameOver, setRows, setGameOver, setWin }: TileBoxP
                         <Grid key={i} item container spacing={2}>
                             {row.map((val, j) => (
                                 <Grid key={`${i}-${j}`} item xs={3} md={3} lg={3}>
-                                    <Tile key={`${i}-${j}`} value={val} dir={dir} row={i} col={j} rIndex={rIndex}/>
+                                    <Tile key={`${i}-${j}`} value={val} dir={dir} row={i} col={j} rIndex={rIndex} />
                                 </Grid>
                             ))}
                         </Grid>
