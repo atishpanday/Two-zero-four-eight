@@ -1,5 +1,5 @@
 import { Alert, Box, Snackbar } from "@mui/material";
-import TileBox from "./components/TileBox.tsx";
+import TileBox from "./components/Board.tsx";
 import HeadBoard from "./components/HeadBoard.tsx";
 import React, { useState } from "react";
 import { startNewGame } from "./controls/startNewGame.ts";
