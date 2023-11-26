@@ -3,37 +3,40 @@ import { Box, Paper, Typography } from '@mui/material';
 import { colors } from '../resources/colors.ts';
 import { setBgColor } from '../utils/setBgColor.ts';
 import { transformTile } from '../utils/transformTile.ts';
-import { animated, useSpring } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 type TileProps = {
     value: number,
+    trVal: number,
     dir: string,
     row: number,
     col: number,
     rIndex: number,
 }
 
-const Tile = ({ value, dir, row, col, rIndex }: TileProps) => {
+const Tile = ({ value, trVal, dir, row, col, rIndex }: TileProps) => {
 
-    const newTile = row === Math.floor(rIndex / 4) && col === (rIndex % 4);
+    const newTile = row === Math.floor(rIndex / 4) && col === rIndex % 4;
 
     const animationStyle = useSpring({
         to: async (next) => {
-            await next({ transform: newTile ? 'scale(1)' : 'translate(0, 0)' })
+            await next({ transform: newTile ? 'scale(1)' : 'translate(0)' })
         },
-        from: { transform: (value > 0) ? transformTile(dir, row, col, rIndex, newTile) : 'translateX(0)' },
+        from: { transform: transformTile(dir, trVal, newTile), transition: '' },
         reset: true,
     })
 
     const gridCellStyle: React.CSSProperties = {
-        height: 100,
+        display: 'flex',
         backgroundColor: colors.COLOR_0,
+        borderRadius: 2,
     }
 
     const tileStyle: React.CSSProperties = {
-        height: 100,
-        textAlign: 'center',
         display: 'flex',
+        height: 100,
+        width: 100,
+        textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         boxShadow: value > 512 ? value === 1024 ? `0 0 10px 5px ${colors.SHDW_COL}` : `0 0 20px 10px ${colors.SHDW_COL}` : 'none',
