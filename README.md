@@ -16,7 +16,18 @@ To install the node packages that are required to run this code, simply run the 
 
 To run the game locally, run the above command. You require `node` and `npm` to run the code.
 
+### Installing `nvm` (Node Version Manager):
+
+You can install `nvm` from their [Official Github Repository](https://github.com/nvm-sh/nvm#installing-and-updating)
+
 ### Installing `node` and `npm`:
 
-You can install `node` and `npm` from the official website of `node`: [Download Node](https://nodejs.org/en/download/current)
+You can use `nvm` to install `node` and `npm`. To do this, run the following command: `nvm install`
 
+### Using the installed version of `node`:
+
+Run the command: `nvm use` to use the specified version of `node`
+
+### Check the version of `node`:
+
+`node -v`
